@@ -1,9 +1,11 @@
 package SwagLabsTest;
 
+import Pages.AboutPage;
 import Pages.LoginPage;
 import Utils.DriverUtils;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
+
 
 public class SwagLabsTest {
 
@@ -15,6 +17,21 @@ public class SwagLabsTest {
 
         loginPage.login();
         DriverUtils.tearDown(loginDriver);
+
+    }
+
+    @Test
+    public void aboutNavigationTest() {
+
+        WebDriver aboutNavigationDriver = DriverUtils.initBrowser("chrome");
+
+        LoginPage loginPage = new LoginPage(aboutNavigationDriver);
+        loginPage.login();
+
+        AboutPage aboutPage = new AboutPage(aboutNavigationDriver);
+        aboutPage.aboutNavigationTest();
+
+        DriverUtils.tearDown(aboutNavigationDriver);
 
     }
 

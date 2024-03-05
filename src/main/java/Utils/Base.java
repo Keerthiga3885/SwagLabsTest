@@ -18,10 +18,27 @@ public class Base {
     }
 
     // Wait until all elements are visible
-    public void waittoVisibleAllElements(WebDriver driver, int time, List<WebElement> elements) {
+    public void waitUntilAllElementsVisible(WebDriver driver, int time, List<WebElement> elements) {
 
         new WebDriverWait(driver, Duration.ofSeconds(time)).until(ExpectedConditions.visibilityOfAllElements(elements));
 
     }
+
+    // Wait until all elements are visible
+    public void waitUntilElementVisible(WebDriver driver, int time, WebElement element) {
+
+        new WebDriverWait(driver, Duration.ofSeconds(time)).until(ExpectedConditions.visibilityOfAllElements(element));
+
+    }
+
+    public void waitUntilPageLoad(WebDriver driver, int time, String url) {
+
+        new WebDriverWait(driver, Duration.ofSeconds(time)).until(ExpectedConditions.urlToBe(url));
+
+    }
+
+
+
+
 
 }
