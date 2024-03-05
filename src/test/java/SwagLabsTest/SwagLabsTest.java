@@ -1,6 +1,7 @@
 package SwagLabsTest;
 
 import Pages.AboutPage;
+import Pages.CartAndCheckoutPage;
 import Pages.LoginPage;
 import Utils.DriverUtils;
 import org.openqa.selenium.WebDriver;
@@ -32,6 +33,21 @@ public class SwagLabsTest {
         aboutPage.aboutNavigationTest();
 
         DriverUtils.tearDown(aboutNavigationDriver);
+
+    }
+
+    @Test
+    public void SelectCostliestItemAndCheckoutTest() {
+
+        WebDriver selectCostliestItemAndCheckoutDriver = DriverUtils.initBrowser("chrome");
+
+        LoginPage loginPage = new LoginPage(selectCostliestItemAndCheckoutDriver);
+        loginPage.login();
+
+        CartAndCheckoutPage cartAndCheckoutPage = new CartAndCheckoutPage(selectCostliestItemAndCheckoutDriver);
+        cartAndCheckoutPage.addCostliestItemToCart();
+
+        DriverUtils.tearDown(selectCostliestItemAndCheckoutDriver);
 
     }
 
