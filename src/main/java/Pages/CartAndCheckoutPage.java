@@ -26,14 +26,14 @@ public class CartAndCheckoutPage extends Base {
     @FindBy(xpath = "//span[text()='Your Cart']")
     WebElement hdrCart;
 
-    @FindBy(id = "Checkout")
+    @FindBy(id = "checkout")
     WebElement btnCheckout;
 
     @FindBy(xpath = "//span[text()='Checkout: Your Information']")
     WebElement hdrCheckout;
 
     @FindBy(id = "first-name")
-    WebElement txtFisrtName;
+    WebElement txtFirstName;
 
     @FindBy(id = "last-name")
     WebElement txtLastName;
@@ -41,13 +41,13 @@ public class CartAndCheckoutPage extends Base {
     @FindBy(id = "postal-code")
     WebElement txtPostalCode;
 
-    @FindBy(xpath = "//input[@value='CONTINUE']")
+    @FindBy(xpath = "//input[@value='Continue']")
     WebElement btnContinue;
 
     @FindBy(xpath = "//span[text()='Checkout: Overview']")
     WebElement hdrOverview;
 
-    @FindBy(xpath = "//*[@class='summary_total_label']")
+    @FindBy(xpath = "//*[@class='summary_info_label summary_total_label']")
     WebElement lblTotalPrice;
 
     public CartAndCheckoutPage(WebDriver driver) {
@@ -57,15 +57,16 @@ public class CartAndCheckoutPage extends Base {
 
     }
 
-    public void addCostliestItemToCart() {
 
-        //Selecting costliest item and add to cart
+    public void addCostliestItemToCart(String firstName, String lastName, String postalCode) {
+
+        //Selecting the costliest item and add to cart
         double highestPrice = 0;
         waitUntilAllElementsVisible(driver, 10, priceOfItems);
 
         for (WebElement item : priceOfItems) {
 
-            Double temp = Double.parseDouble(item.getText().split("\\$")[1]);
+            double temp = Double.parseDouble(item.getText().split("\\$")[1]);
 
             if (temp > highestPrice) {
                 highestPrice = temp;
@@ -91,11 +92,12 @@ public class CartAndCheckoutPage extends Base {
         waitUntilPageLoad(driver, 10, driver.getCurrentUrl());
         waitUntilElementVisible(driver, 5, hdrCheckout);
 
-        txtFisrtName.sendKeys("keerthi");
-        txtLastName.sendKeys("murugan");
-        txtPostalCode.sendKeys("1234");
+        txtFirstName.sendKeys(firstName);
+        txtLastName.sendKeys(lastName);
+        txtPostalCode.sendKeys(postalCode);
 
         waitToClick(driver,10,btnContinue);
+        btnContinue.click();
 
         waitUntilPageLoad(driver, 10, driver.getCurrentUrl());
         waitUntilElementVisible(driver, 5, hdrOverview);
